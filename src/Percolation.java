@@ -19,14 +19,15 @@ public class Percolation {
         }
     }
 
-    private int oneD(int row, int col){
+    // Helper method for opening new sites
+    private int openNew(int row, int col){
         row-=1;
         return row*grid.length + col + 1;
     }
 
-    // open site (row, col) if it is not open already
+    // Opens new site based on input parameters
     public void open(int row, int col){
-        int input = oneD(row, col);
+        int input = openNew(row, col);
         if(row > 0 && col > 0 && row <= grid.length && col <= grid.length){
             row-=1;
             col-=1;
@@ -67,24 +68,24 @@ public class Percolation {
         }
     }
 
-    // is site (row, col) open?
+    // Checks if a praticular location is open
     public boolean isOpen(int row, int col) {
         return grid[row - 1][col - 1];
     }
 
-    // is site (row, col) full?
+    // Checks if a particular location is full
     public boolean isFull(int row, int col)  {
         int input = oneD(row, col);
 
         return grid[row - 1][col - 1] && perc.connected(0, input);
     }
 
-    // number of open sites
+    // Returns the number of open sites
     public int numberOfOpenSites(){
         return openCount;
     }
 
-    // does the system percolate?
+    // Method checks whether or not the system percolates
     public boolean percolates(){
         return perc.connected(0,1);
     }
